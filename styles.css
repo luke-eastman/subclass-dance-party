@@ -4,6 +4,12 @@ body, html{
 body{
   margin: 0px;
   background-color:#444;
+  background-image: url("https://www.thepinballcompany.com/wp-content/uploads/2018/03/vp03a.jpg");
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
   font-size: 18px;
 }
 body, a:link, a:visited, a:active{

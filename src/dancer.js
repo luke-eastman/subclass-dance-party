@@ -20,3 +20,17 @@ Dancer.prototype.setPosition = function(top, left) {
   };
   this.$node.css(styleSettings);
 };
+
+Dancer.prototype.lineUp = function(index, noOfDancers) {
+  var startingPoint = 15; // === '15%';
+  var top = 85 / noOfDancers * index + startingPoint;
+  top = top + '%';
+  //convert to % before passing to setPosition
+  var left = index % 2 ? '15%' : '85%';
+  this.setPosition(top, left);
+};
+
+Dancer.prototype.moveAway = function(index) {
+  var left = index % 2 ? '+=15px' : '-=15px';
+  this.setPosition(this.top, left);
+};

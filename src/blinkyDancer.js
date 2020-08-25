@@ -12,3 +12,13 @@ BlinkyDancer.prototype.step = function() {
   this.oldStep();
   this.$node.toggle();
 };
+
+BlinkyDancer.prototype.lineUp = function(index, noOfDancers) {
+  this.oldLineUp = Dancer.prototype.lineUp;
+  this.oldLineUp(index, noOfDancers);
+  var styleSettings = {
+    borderWidth: '+=5',
+    borderRadius: '+=5'
+  };
+  this.$node.css(styleSettings);
+};

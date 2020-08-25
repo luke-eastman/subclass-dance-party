@@ -23,12 +23,50 @@ $(document).ready(function() {
     // make a dancer with a random position
 
     var dancer = new dancerMakerFunction(
-      $("body").height() * Math.random(),
-      $("body").width() * Math.random(),
+      $('body').height() * Math.random(),
+      $('body').width() * Math.random(),
       Math.random() * 1000
     );
 
+    window.dancers.push(dancer);
+
     $('body').append(dancer.$node);
   });
+
+  $('.lineUpButton').on('click', function(event) {
+    for (var i = 0; i < window.dancers.length; i++) {
+      window.dancers[i].lineUp(i, window.dancers.length);
+    }
+  });
+
+  $('.moveButton').on('click', function(event) {
+    // iterate through all dancers and get their positions
+    // run some math function to determine distance between each pair of dancers
+    // if any of the dancer pairs are too close, run the move away function on both
+    var needsToMove = [];
+    var minimumDistance = 200;
+
+    for (var i = 0; i < window.dancers.length - 1; i++) {
+      for (var j = i + 1; j < window.dancers.length; j++) {
+        var widthDist = Math.pow(window.dancers[i].$node.position().left - window.dancers[j].$node.position().left, 2);
+        var heightDist = Math.pow(window.dancers[i].$node.position().top - window.dancers[j].$node.position().top, 2);
+        var distance = Math.sqrt(heightDist + widthDist);
+        if (distance <= minimumDistance) {
+          needsToMove.push([i, j]);//[[1,3], [2,4], [3,5], [4,6], [5,7]]
+        }
+      }
+
+    }
+    var alreadyMoved = [];
+    for (var i = 0; i < needsToMove.length; i++) {
+      var tuple = needsToMove[i];
+      if (!alreadyMoved.includes(tuple[0])) {
+        window.dancers[tuple[0]].moveAway(tuple[0]);
+        alreadyMoved = alreadyMoved.concat(tuple);
+      }
+    }
+  });
+
+
 });
 
