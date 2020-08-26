@@ -25,11 +25,15 @@ body, a:link, a:visited, a:active{
 }
 .title{
   background-color: #777;
+  margin: auto;
 }
 .dancer{
   border:10px;
-  border-color: red;
+  border-color: white;
   border-style: solid;
   border-radius:10px;
   position:absolute;
+}
+.dancer:hover {
+  border-color: cyan;
 }
